@@ -7,8 +7,7 @@ import fetch from 'node-fetch';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const WEBHOOK_ID = process.env.WEBHOOK_ID || "WH-4HH29777WE733974A-5YJ87821XT078723U";
-
+const WEBHOOK_ID = process.env.WEBHOOK_ID || "WH-54M31324A08453805-0TT498265C515724R";
 app.use(express.json());
 
 async function fetchCertificate(url) {
