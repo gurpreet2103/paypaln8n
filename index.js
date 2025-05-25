@@ -5,7 +5,7 @@ import fetch from "node-fetch";
 const app = express();
 app.use(express.json());
 
-const WEBHOOK_ID = process.env.WEBHOOK_ID || "<YOUR_WEBHOOK_ID>";
+const WEBHOOK_ID = process.env.WEBHOOK_ID || "WH-4HH29777WE733974A-5YJ87821XT078723U";
 
 // Utility to fetch PayPal cert
 async function fetchCertificate(url) {
