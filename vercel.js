@@ -7,7 +7,6 @@ app.use(express.json());
 
 const WEBHOOK_ID = process.env.WEBHOOK_ID || "WH-4HH29777WE733974A-5YJ87821XT078723U";
 
-// Utility to fetch PayPal cert
 async function fetchCertificate(url) {
   const response = await fetch(url);
   if (!response.ok) {
@@ -32,7 +31,6 @@ app.post("/verify", async (req, res) => {
 
     const verifier = crypto.createVerify("SHA256");
     verifier.update(message);
-
     const isValid = verifier.verify(certificate, signatureBuffer);
 
     res.json({ signatureValid: isValid });
@@ -42,5 +40,5 @@ app.post("/verify", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+// Export the Express app as a Vercel function
+export default app;
