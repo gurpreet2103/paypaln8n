@@ -1,9 +1,15 @@
-// api/verify.js
+// server.js
 
+import express from 'express';
 import crypto from 'crypto';
 import fetch from 'node-fetch';
 
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 const WEBHOOK_ID = process.env.WEBHOOK_ID || "WH-4HH29777WE733974A-5YJ87821XT078723U";
+
+app.use(express.json());
 
 async function fetchCertificate(url) {
   const response = await fetch(url);
@@ -13,11 +19,7 @@ async function fetchCertificate(url) {
   return await response.text();
 }
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
-  }
+app.post('/api/verify', async (req, res) => {
   try {
     const {
       transmission_id,
@@ -41,4 +43,8 @@ export default async function handler(req, res) {
     console.error(err);
     res.status(500).json({ error: err.message });
   }
-}
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}/api/verify`);
+});
